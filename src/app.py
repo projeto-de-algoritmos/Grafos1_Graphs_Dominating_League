@@ -5,40 +5,39 @@ import re
 
 app = Flask(__name__)
 
-champions = []
+champions = {}
 relations = {}
-url = "https://lolcounter.com/champions/"
+myheaders = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
+url = "https://www.leagueofgraphs.com/champions/counters"
+champurl = "https://www.leagueofgraphs.com"
 
 @app.route("/")
 def index():
-    print("Aqui")
-    champurl = requests.get(url)
-    soup = BeautifulSoup(champurl.text,'html.parser')
-    for champs in soup.find_all("div", attrs={"class":"left champ-img"}):
-        print(str(champs))
-        results = re.search(r'find=\"[a-z]*\"', str(champs))
-        if results:
-            champions.append(results.group()[6:-1])
-    
-    #scraping("aatrox")
-    #scraping("anivia")
-    #scraping("alistar")
-    #relationships()
+    scraping()
+    relationships()
+    addrelations(champions["Aatrox"])
     return str(champions)
-    #return "Alo"
 
-def scraping(name):
-    if champions.count(name) == 0:
-        champions.append(name)
-    
+def scraping():
+    champlisturl = requests.get(url, headers=myheaders)
+    soup = BeautifulSoup(champlisturl.text,'html.parser')
+    for champs in soup.select("tr > td.championCell:first-of-type"):
+        name = champs.select("span.name")[0].text
+        role = champs.select("i")[0].text.replace(" ","")
+        ref = champs.select("a")[0]["href"]
+        champions[name] = [role[1:],ref]
 
 def relationships():
-    for a in champions:
-        relations[a] = []
+    pass
+    #for champ in champions:
+        #print(champions[champ][1])
+        #addrelations(champ)
 
-    addrelation("aatrox",["anivia","mid",5])
-    addrelation("anivia",["aatrox","top",5])
-    addrelation("aatrox",["alistar","sup",7])
-
-def addrelation(champion, link):
-    relations[champion].append(link)
+def addrelations(champ):
+    #pass
+    #print(champ[1])
+    searchurl = champurl+champ[1]
+    #print(searchurl)
+    relationurl = requests.get(searchurl, headers=myheaders)
+    #soup = BeautifulSoup(relationurl.text,'html.parser')
+    print(relationurl.text)
