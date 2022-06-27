@@ -1,13 +1,19 @@
 from flask import Flask
 from bs4 import BeautifulSoup
 import requests
-import re
 
 app = Flask(__name__)
 
 champions = {}
 relations = {}
 counter = {}
+composition = {"Top" : "0",
+                "Jungler" : "0",
+                "Mid" : "0",
+                "ADCarry" : "0",
+                "Support" : "0",
+            }
+
 myheaders = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
 url = "https://www.leagueofgraphs.com/champions/counters"
 champurl = "https://www.leagueofgraphs.com"
@@ -16,10 +22,8 @@ champurl = "https://www.leagueofgraphs.com"
 def index():
     scraping()
     relationships()
-    #addrelations("Aatrox")
-    print(relations)
-    return ("enois q voa")
-    #return str(champions)
+    bfs("Aatrox")
+    return (composition)
 
 def scraping():
     champlisturl = requests.get(url, headers=myheaders)
@@ -32,15 +36,12 @@ def scraping():
 
 def relationships():
     for champ in champions:
-        #print(champions[champ][1])
-        #print(champ)
         addrelations(champ)
 
 def addrelations(champ):
     print(champ)
     if not champ in relations:
         searchurl = champurl+champions[champ][1]
-        #print(searchurl)
         relationurl = requests.get(searchurl, headers=myheaders)
         soup = BeautifulSoup(relationurl.text,'html.parser')
         combiners=soup.select("div#mainContent > div.row:first-of-type > div.medium-8.small-24.columns:nth-of-type(3)")
@@ -56,3 +57,29 @@ def addrelations(champ):
         
         if len(champCounters):
             counter[champ] = champCounters[0].text
+
+
+def bfs(node):
+    if node in counter:
+        inUse = []
+        visited = []
+        queue = []
+        mycounter = counter[node]
+        visited.append(mycounter)
+        queue.append(mycounter)
+        while queue:
+            aux = queue.pop(0)
+
+            for position in composition:
+                if position in champions[aux][0] and composition[position] == "0" and inUse.count(aux) == 0:
+                    composition[position] = aux
+                    inUse.append(aux)
+
+        
+            for neighbour in relations[aux]:
+                if neighbour not in visited:
+                    visited.append(neighbour)
+                    queue.append(neighbour)
+        print(composition)
+    else:
+        print("There is no counter to this champion using gold lead")
