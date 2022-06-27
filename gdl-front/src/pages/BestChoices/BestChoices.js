@@ -3,7 +3,7 @@ import background from "../../assets/img/Group4.png"
 import logo from "../../assets/img/Lol-logo.png"
 import { useNavigate } from "react-router-dom"
 
-export function ChooseChampion(){
+export function BestChoices(){
 const navigate = useNavigate()
 
   return(
@@ -11,11 +11,8 @@ const navigate = useNavigate()
       <div style={{display:'flex', justifyContent:'space-between'}}>
         <TitleText>Graphs Dominating League</TitleText>
 
-        <BackButton onClick={() => navigate("/")}>Voltar</BackButton>
+        <BackButton onClick={() => navigate("/")}>Reiniciar</BackButton>
       </div>
-    
-      <SelectButton onClick={() => navigate("/bestChoices")}>Selecionar Campeão</SelectButton>
-
       <LogoImg src={logo} />
     </Container>
   )
@@ -34,21 +31,6 @@ const TitleText = styled.text`
   font-family: 'Fredericka the Great';
   font-size: 50px;
   width: 60%;
-  color: #C7971A;
-`
-
-const SelectButton = styled.button`
-  border:0;
-  border-radius: 12px;
-  width: fit-content;
-  background-color: #141351;
-  border: 2px solid #C7971A;
-  align-self: center;
-  cursor: pointer;
-  padding: 10px 15px;
-
-  font-size: 20px;
-  font-family: 'Fredericka the Great';
   color: #C7971A;
 `
 
