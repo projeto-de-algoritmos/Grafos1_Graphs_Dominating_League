@@ -1,6 +1,7 @@
 # Dominating League
 
-**Conteúdo da Disciplina**: Grafos 1<br>
+**Disciplina**: Projeto de Algoritmos  
+**Conteúdo**: Grafos 1<br>
 
 ## Alunos
 |Matrícula | Aluno |
@@ -13,9 +14,13 @@ O projeto foi criado para auxiliar os jogadores de League of Legends a fazer boa
 
 ## Screenshots
 
+![Frame 3](https://user-images.githubusercontent.com/48032705/176071373-b0c7165d-78dc-46f9-8b8c-5c528bfb4cb9.png)
+![Frame 6(1)](https://user-images.githubusercontent.com/48032705/176073536-f63db72b-c260-48d4-a280-cb3a54421c47.png)
+![photo_2022-06-27_22-57-37 (2)](https://user-images.githubusercontent.com/48032705/176072564-1ece2cb7-004a-4050-ae6c-9f3703e4705b.jpg)
+![photo_2022-06-27_22-57-37](https://user-images.githubusercontent.com/48032705/176072602-8aa19d55-40bf-44cc-9bc9-7f18c2fa0990.jpg)
 
 ## Instalação 
-**Linguagem**: Python
+**Linguagem**: Python  
 **Framework**: Flask<br>
 
 ## Uso
@@ -53,4 +58,4 @@ flask run
 ```
 
 ## Outros 
-
+Link da apresentação: https://youtu.be/Xp17_Qtw6eA 
