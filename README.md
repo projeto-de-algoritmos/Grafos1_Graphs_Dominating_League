@@ -9,14 +9,14 @@
 | 180022237  |  Liverson Paulo Furtado Severo |
 
 ## Sobre 
-O projeto foi criado para auxiliar os jogadores de League of Legends a fazer boas escolhas na montagem dos times. Consiste na escolha do campeão a ser derrotado e na utilização de mecanismos de grafos para traçar as melhores combinações possíveis para atingir a vitória.
+O projeto foi criado para auxiliar os jogadores de League of Legends a fazer boas escolhas na montagem dos times. Consiste na escolha do campeão a ser derrotado e na utilização de mecanismos de grafos para traçar as melhores combinações possíveis para atingir a vitória, tanto fornecendo o melhor personagem para o combate 1:1 quanto o time que teria o melhor desempenho contra o adversário.
 
 ## Screenshots
 
 
 ## Instalação 
 **Linguagem**: Python
-**Framework**: xxxxx<br>
+**Framework**: Flask<br>
 
 ## Uso
 ### 1 - Clone o repositório
@@ -29,25 +29,28 @@ sudo apt install virtualenv
 ```
 ### 3 - Crie uma nova máquina virtual
 ```
-virtualen env
+virtualenv lol
 ```
 ### 4 - Ative a máquina virtual criada
 ```
-source env/bin/activate
+source lol/bin/activate
 ```
 ### 5 - Instale os requisitos listados no arquivo
 ```
-pip3 install -r requirements.txt
+sudo pip3 install python-dotenv
+sudo pip3 install requests
+sudo pip3 install Flask
+sudo pip3 install beautifulsoup4
+sudo apt-get install python3-bs4
 ```
-### 6 - Rode o projeto utilizando npm
+### 6 - Entre na pasta src 
 ```
-npm install
+cd src
 ```
+### 7 - Rode o projeto
 ```
-npm start
+flask run
 ```
-
-Navegue até [localhost:3000](http://localhost:3000)
 
 ## Outros 
 
